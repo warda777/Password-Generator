@@ -1,7 +1,11 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class PasswordGenerator extends JFrame {
+    private PasswortGeneratorLogik passwortGeneratorLogik;
+
     public PasswordGenerator(){
         // render frame and ad a title
         super("Password Generator");
@@ -20,6 +24,9 @@ public class PasswordGenerator extends JFrame {
 
         // center the GUI to the screen
         setLocationRelativeTo(null);
+
+        // init password generator
+        passwortGeneratorLogik = new PasswortGeneratorLogik();
 
         // render GUI components
         addGuiComponents();
@@ -98,6 +105,34 @@ public class PasswordGenerator extends JFrame {
         JButton generateButton = new JButton("Generate");
         generateButton.setFont(new Font("Dialog", Font.PLAIN, 30));
         generateButton.setBounds(155, 477, 222, 41);
+        generateButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // validation: generate a password only when length > 0 and one of the toggled buttons is pressed
+                if(passwordLengthInputArea.getText().length() <= 0) return;
+                boolean anyToggleSelected = lowercaseToggle.isSelected() ||
+                        uppercaseToggle.isSelected() ||
+                        numbersToggle.isSelected() ||
+                        symbolsToggle.isSelected();
+
+                // generate password
+                // converts the text to an integer value
+                int passwordLength = Integer.parseInt(passwordLengthInputArea.getText());
+                if (anyToggleSelected){
+                    String generatedPassword = passwortGeneratorLogik.generatePassword(passwordLength,
+                            uppercaseToggle.isSelected(),
+                            lowercaseToggle.isSelected(),
+                            numbersToggle.isSelected(),
+                            symbolsToggle.isSelected());
+
+                    // display password back to the user
+                    passwordOutput.setText(generatedPassword);
+
+                }
+            }
+        });
+
+        add(generateButton);
 
     }
 }
