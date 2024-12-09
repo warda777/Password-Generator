@@ -62,5 +62,26 @@ public class PasswordGenerator extends JFrame {
         passwordLengthLabel.setBounds(25, 215, 272, 39);
         add(passwordLengthLabel);
 
+        // create toggle buttons
+        // uppercase letter toggle
+        JToggleButton uppercaseToggle = new JToggleButton("Uppercase");
+        uppercaseToggle.setBounds(25, 302, 225, 56);
+        add(uppercaseToggle);
+
+        // lowercase letter toggle
+        JToggleButton lowercaseToggle = new JToggleButton("Lowercase");
+        lowercaseToggle.setBounds(282, 302, 225, 56);
+        add(lowercaseToggle);
+
+        // numbers toggle
+        JToggleButton numbersToggle = new JToggleButton("Numbers");
+        numbersToggle.setBounds(25, 373, 225, 56);
+        add(numbersToggle);
+
+        // symbols toggle
+        JToggleButton symbolsToggle = new JToggleButton("Symbols");
+        symbolsToggle.setBounds(282, 373, 225, 56);
+        add(symbolsToggle);
+
     }
 }
